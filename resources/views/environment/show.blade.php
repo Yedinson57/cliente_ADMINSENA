@@ -1,0 +1,103 @@
+@extends('layouts.app')
+
+@section('content')
+
+<script>
+    if (!localStorage.getItem('user_session')) {
+        alert('Acceso denegado: Debes iniciar sesión para acceder al panel de administración.');
+        window.location.href = "{{ route('login') }}";
+    }
+</script>
+
+<div class="py-5 rounded-4" style="background-color: #f4f6f9;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    
+                    <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
+                        <h4 class="mb-0 fw-bold">Detalle del Ambiente</h4>
+                        <p class="mb-0 mt-1 small opacity-75">{{ $environments['name'] }}</p>
+                    </div>
+                    
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        
+                        <div class="mb-4">
+                            <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID de Ambiente</span>
+                            <div class="p-3 bg-light rounded-3 fw-bold text-secondary border-start border-3 border-secondary">
+                                #{{ $environments['id'] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Nombre</span>
+                            <div class="p-3 bg-light rounded-3 fw-medium text-dark">
+                                {{ $environments['name'] }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Ubicación</span>
+                            <div class="p-3 bg-light rounded-3 text-dark">
+                                {{ $environments['location'] }}
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-6">
+                                <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">ID del Área</span>
+                                <div class="p-3 bg-light rounded-3 text-secondary font-monospace">
+                                    {{ $environments['training_center_id'] }}
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Visualización de la Imagen --}}
+                        <div class="mb-4">
+                            @if($environments->urlFoto)
+                            <div class="d-inline-block p-2 border rounded-4 bg-light shadow-sm">
+                                <img src="{{ asset('storage/images/' . $environments->urlFoto) }}"
+                                    alt="Fotografía del Ambiente"
+                                    class="rounded-3 img-fluid"
+                                    style="max-height: 250px; width: 100%; object-fit: cover;">
+                            </div>
+                            @else
+                            <div class="p-4 border rounded-4 bg-light text-muted d-inline-block w-100" style="max-width: 300px;">
+                                <i class="bi bi-image fs-1 d-block mb-2 text-secondary"></i>
+                                <span class="fw-medium">Sin fotografía asignada</span>
+                            </div>
+                            @endif
+                        </div>
+
+                        <hr class="my-4 opacity-25">
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Fecha de registro</span>
+                                <div class="p-2 bg-light rounded-2 small text-secondary">
+                                    {{ \Carbon\Carbon::parse($environments['created_at'])->format('d/m/Y H:i') }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="text-muted small d-block mb-1 fw-bold text-uppercase tracking-wider">Última actualización</span>
+                                <div class="p-2 bg-light rounded-2 small text-secondary">
+                                    {{ \Carbon\Carbon::parse($environments['updated_at'])->format('d/m/Y H:i') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{ url()->previous() }}" class="btn btn-dark px-5 py-2 fw-bold rounded-3 shadow-sm">
+                                Volver al Listado
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
