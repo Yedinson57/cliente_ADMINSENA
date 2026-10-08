@@ -35,7 +35,7 @@
                     </ul>
                 </li>
 
-                <form action="{{ route('apprentice.index') }}" method="GET" class="d-flex me-lg-3 my-2 my-lg-0" role="search">
+                <form action="{{ route('apprentices.index') }}" method="GET" class="d-flex me-lg-3 my-2 my-lg-0" role="search">
                     <div class="input-group">
                         <input class="form-control border-0 shadow-sm"
                             type="search"

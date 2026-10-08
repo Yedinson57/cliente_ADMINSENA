@@ -24,75 +24,35 @@ use App\Http\Controllers\AdvertisementController;
 |
 */
 
-Route::get('area/list',[AreaController::class,'index'])->name('area.index');
-Route::get('area/{id}',[AreaController::class,'show'])->name('area.show');
+Route::get('areas',[AreaController::class,'index'])->name('areas.index');
+Route::get('areas/{id}',[AreaController::class,'show'])->name('areas.show');
 
-Route::get('trainingcenter/list',[TrainingCenterController::class,'index'])->name('trainingcenter.index');
-Route::get('trainingcenter/{id}',[TrainingCenterController::class,'show'])->name('trainingcenter.show');
+Route::get('trainingcenters',[TrainingCenterController::class,'index'])->name('trainingcenters.index');
+Route::get('trainingcenters/{id}',[TrainingCenterController::class,'show'])->name('trainingcenters.show');
 
-Route::get('computer/list',[ComputerController::class,'index'])->name('computer.index');
-Route::get('computer/{id}',[ComputerController::class,'show'])->name('computer.show');
+Route::get('computers',[ComputerController::class,'index'])->name('computers.index');
+Route::get('computers/{id}',[ComputerController::class,'show'])->name('computers.show');
 
-Route::get('course/create',[CourseController::class,'create'])->name('course.create');
-Route::post('course/store',[CourseController::class,'store'])->name('course.store');
-Route::get('course/list',[CourseController::class,'index'])->name('course.index');
-Route::get('course/{id}',[CourseController::class,'show'])->name('course.show');
-Route::get('course/{course}/editar',[CourseController::class,'edit'])->name('course.edit');
-Route::put('course/{course}',[CourseController::class,'update'])->name('course.update');
-Route::delete('course/{course}',[CourseController::class,'destroy'])->name('course.destroy');
+Route::get('courses',[CourseController::class,'index'])->name('courses.index');
+Route::get('courses/{id}',[CourseController::class,'show'])->name('courses.show');;
 
-Route::get('teacher/create',[TeacherController::class,'create'])->name('teacher.create');
-Route::post('teacher/store',[TeacherController::class,'store'])->name('teacher.store');
-Route::get('teacher/list',[TeacherController::class,'index'])->name('teacher.index');
-Route::get('teacher/{id}',[TeacherController::class,'show'])->name('teacher.show');
-Route::get('teacher/{teacher}/editar',[TeacherController::class,'edit'])->name('teacher.edit');
-Route::put('teacher/{teacher}',[TeacherController::class,'update'])->name('teacher.update');
-Route::delete('teacher/{teacher}',[TeacherController::class,'destroy'])->name('teacher.destroy');
+Route::get('teachers',[TeacherController::class,'index'])->name('teachers.index');
+Route::get('teachers/{id}',[TeacherController::class,'show'])->name('teachers.show');
 
-Route::get('apprentice/create',[ApprenticeController::class,'create'])->name('apprentice.create');
-Route::post('apprentice/store',[ApprenticeController::class,'store'])->name('apprentice.store');
-Route::get('apprentice/list',[ApprenticeController::class,'index'])->name('apprentice.index');
-Route::get('apprentice/{id}',[ApprenticeController::class,'show'])->name('apprentice.show');
-Route::get('apprentice/{apprentice}/editar',[ApprenticeController::class,'edit'])->name('apprentice.edit');
-Route::put('apprentice/{apprentice}',[ApprenticeController::class,'update'])->name('apprentice.update');
-Route::delete('apprentice/{apprentice}',[ApprenticeController::class,'destroy'])->name('apprentice.destroy');
+Route::get('apprentices',[ApprenticeController::class,'index'])->name('apprentices.index');
+Route::get('apprentices/{id}',[ApprenticeController::class,'show'])->name('apprentices.show');
 
-Route::get('program/create',[ProgramController::class,'create'])->name('program.create');
-Route::post('program/store',[ProgramController::class,'store'])->name('program.store');
-Route::get('program/list',[ProgramController::class,'index'])->name('program.index');
-Route::get('program/{id}',[ProgramController::class,'show'])->name('program.show');
-Route::get('program/{programs}/editar',[ProgramController::class,'edit'])->name('program.edit');
-Route::put('program/{programs}',[ProgramController::class,'update'])->name('program.update');
-Route::delete('program/{programs}',[ProgramController::class,'destroy'])->name('program.destroy');
+Route::get('programs',[ProgramController::class,'index'])->name('programs.index');
+Route::get('programs/{id}',[ProgramController::class,'show'])->name('programs.show');
 
-Route::get('offer/create',[OfferController::class,'create'])->name('offer.create');
-Route::post('offer/store',[OfferController::class,'store'])->name('offer.store');
-Route::get('offer/list',[OfferController::class,'index'])->name('offer.index');
-Route::get('offer/{id}',[OfferController::class,'show'])->name('offer.show');
-Route::get('offer/{offers}/editar',[OfferController::class,'edit'])->name('offer.edit');
-Route::put('offer/{offers}',[OfferController::class,'update'])->name('offer.update');
-Route::delete('offer/{offers}',[OfferController::class,'destroy'])->name('offer.destroy');
+Route::get('offers',[OfferController::class,'index'])->name('offers.index');
+Route::get('offers/{id}',[OfferController::class,'show'])->name('offers.show');
 
-Route::get('cohort/create',[CohortController::class,'create'])->name('cohort.create');
-Route::post('cohort/store',[CohortController::class,'store'])->name('cohort.store');
-Route::get('cohort/list',[CohortController::class,'index'])->name('cohort.index');
-Route::get('cohort/{id}',[CohortController::class,'show'])->name('cohort.show');
-Route::get('cohort/{cohorts}/editar',[CohortController::class,'edit'])->name('cohort.edit');
-Route::put('cohort/{cohorts}',[CohortController::class,'update'])->name('cohort.update');
-Route::delete('cohort/{cohorts}',[CohortController::class,'destroy'])->name('cohort.destroy');
+Route::get('cohorts',[CohortController::class,'index'])->name('cohorts.index');
+Route::get('cohorts/{id}',[CohortController::class,'show'])->name('cohorts.show');
 
-Route::get('environment/create',[EnvironmentController::class,'create'])->name('environment.create');
-Route::post('environment/store',[EnvironmentController::class,'store'])->name('environment.store');
-Route::get('environment/list',[EnvironmentController::class,'index'])->name('environment.index');
-Route::get('environment/{id}',[EnvironmentController::class,'show'])->name('environment.show');
-Route::get('environment/{environments}/editar',[EnvironmentController::class,'edit'])->name('environment.edit');
-Route::put('environment/{environments}',[EnvironmentController::class,'update'])->name('environment.update');
-Route::delete('environment/{environments}',[EnvironmentController::class,'destroy'])->name('environment.destroy');
+Route::get('environments',[EnvironmentController::class,'index'])->name('environments.index');
+Route::get('environments/{id}',[EnvironmentController::class,'show'])->name('environments.show');
 
-Route::get('advertisement/create',[AdvertisementController::class,'create'])->name('advertisement.create');
-Route::post('advertisement/store',[AdvertisementController::class,'store'])->name('advertisement.store');
-Route::get('advertisement/list',[AdvertisementController::class,'index'])->name('advertisement.index');
-Route::get('advertisement/{id}',[AdvertisementController::class,'show'])->name('advertisement.show');
-Route::get('advertisement/{advertisements}/editar',[AdvertisementController::class,'edit'])->name('advertisement.edit');
-Route::put('advertisement/{advertisements}',[AdvertisementController::class,'update'])->name('advertisement.update');
-Route::delete('advertisement/{advertisements}',[AdvertisementController::class,'destroy'])->name('advertisement.destroy');
+Route::get('advertisements',[AdvertisementController::class,'index'])->name('advertisements.index');
+Route::get('advertisements/{id}',[AdvertisementController::class,'show'])->name('advertisements.show');

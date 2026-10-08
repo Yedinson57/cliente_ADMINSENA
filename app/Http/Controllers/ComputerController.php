@@ -18,17 +18,17 @@ class ComputerController extends Controller
     {
 
         $url = env('URL_SERVER_API');
-        $computers = $this->fetchDataFromApi($url . '/computer/list');
+        $computers = $this->fetchDataFromApi($url . '/computers');
 
-        return view('computer.index', compact('computers'));
+        return view('computers.index', compact('computers'));
     }
 
     public function show($id)
     {
 
         $url = env('URL_SERVER_API');
-        $computers = $this->fetchDataFromApi($url . '/computer/' . $id);
+        $computers = $this->fetchDataFromApi($url . '/computers/' . $id);
 
-        return view('computer.show', compact('computers'));
+        return view('computers.show', compact('computers'));
     }
 }

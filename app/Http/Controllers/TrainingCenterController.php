@@ -18,17 +18,17 @@ class TrainingCenterController extends Controller
     {
 
         $url = env('URL_SERVER_API');
-        $trainingcenters = $this->fetchDataFromApi($url . '/trainingcenter/list');
+        $trainingcenters = $this->fetchDataFromApi($url . '/trainingcenters');
 
-        return view('trainingcenter.index', compact('trainingcenters'));
+        return view('trainingcenters.index', compact('trainingcenters'));
     }
 
     public function show($id)
     {
 
         $url = env('URL_SERVER_API');
-        $trainingcenters = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
+        $trainingcenters = $this->fetchDataFromApi($url . '/trainingcenters/' . $id);
 
-        return view('trainingcenter.show', compact('trainingcenters'));
+        return view('trainingcenters.show', compact('trainingcenters'));
     }
 }

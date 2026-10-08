@@ -15,25 +15,21 @@ class CohortController extends Controller
         return $response->json();
     }
 
-    public function index()   //http://api.codersfree.test/v1/categories?included=posts
+    public function index()   
     {
 
         $url = env('URL_SERVER_API');
-
-        $cohorts = $this->fetchDataFromApi($url . '/cohorts');
         $cohorts = $this->fetchDataFromApi($url . '/cohorts');
 
-        return view('cohort.index', compact('cohorts'));
+        return view('cohorts.index', compact('cohorts'));
     }
 
     public function show($id)
     {
 
         $url = env('URL_SERVER_API');
+        $cohorts = $this->fetchDataFromApi($url . '/cohorts/' . $id);
 
-        $cohort = $this->fetchDataFromApi($url . '/cohort/' . $id);
-        $cohort = $this->fetchDataFromApi($url . '/cohorts/' . $id);
-
-        return view('cohort.show', compact('cohort'));
+        return view('cohorts.show', compact('cohorts'));
     }
 }

@@ -18,17 +18,17 @@ class AreaController extends Controller
     {
 
         $url = env('URL_SERVER_API');
-        $areas = $this->fetchDataFromApi($url . '/area/list');
+        $areas = $this->fetchDataFromApi($url . '/areas');
 
-        return view('area.index', compact('areas'));
+        return view('areas.index', compact('areas'));
     }
 
     public function show($id)
     {
 
         $url = env('URL_SERVER_API');
-        $areas = $this->fetchDataFromApi($url . '/area/' . $id);
+        $areas = $this->fetchDataFromApi($url . '/areas/' . $id);
 
-        return view('area.show', compact('areas'));
+        return view('areas.show', compact('areas'));
     }
 }
