@@ -40,7 +40,7 @@
                                     <td class="text-secondary small">{{ $cohort['schedule'] }}</td>
                                     <td>
                                         <span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded">
-                                            {{ $cohort['offer_id'] ?? 'No asignada' }}
+                                            ID: {{ $cohort['offer_id'] ?? 'No asignada' }}
                                         </span>
                                     </td>
 

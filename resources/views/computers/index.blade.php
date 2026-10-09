@@ -43,7 +43,7 @@
                                 </td>
                                 <td>
                                     <span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded">
-                                        {{ $computer['environment_id'] ?? 'No asignada' }}
+                                        ID: {{ $computer['environment_id'] ?? 'No asignada' }}
                                     </span>
                                 </td>
 

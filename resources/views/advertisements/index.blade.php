@@ -47,7 +47,7 @@
                                 <td class="text-secondary small">{{ $advertisement['content'] }}</td>
                                 <td>
                                     <span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded">
-                                        {{ $advertisement['training_center_id'] ?? 'No asignada' }}
+                                        ID: {{ $advertisement['training_center_id'] ?? 'No asignada' }}
                                     </span>
                                 </td>
                                 {{-- Columna de Imagen con Disparador de Modal --}}

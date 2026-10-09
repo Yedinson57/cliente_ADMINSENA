@@ -31,4 +31,45 @@ class OfferController extends Controller
 
         return view('offers.show', compact('offers'));
     }
+
+    public function create()
+    {
+        $url = env('URL_SERVER_API');
+        $programs = Http::get($url .'/programs')->json();
+
+        return view('offers.create',compact('programs'));
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/offers', $request->all());
+
+        return redirect()->route('offers.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $programs = Http::get($url .'/programs')->json();
+        $offer = $this->fetchDataFromApi($url . '/offers/' . $id);
+        return view('offers.edit', compact('offer','programs'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/offers/' . $id, $request->all());
+
+        return redirect()->route('offers.index');
+    }
+
+    public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/offers/' . $id);
+        return redirect()->route('offers.index');
+    }
 }

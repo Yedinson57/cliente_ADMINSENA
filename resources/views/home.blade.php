@@ -22,7 +22,7 @@
                 <div class="carousel-caption d-none d-md-block z-2 mt-4">
                     <h1 class="display-4 fw-bold text-uppercase" style="color: #39A900; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Admin SENA</h1>
                     <p class="fs-4 fw-medium text-white" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Bienvenido al Panel de Administración y Gestión de Procesos Académicos.</p>
-                    <a href="/login" class="btn btn-light fw-bold px-4 py-2 mt-2">Comenzar Registro</a>
+                    <a href="/area/create" class="btn btn-light fw-bold px-4 py-2 mt-2">Comenzar Registro</a>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 <div class="carousel-caption d-none d-md-block z-2 mt-4">
                     <h1 class="display-4 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Conoce Ofertas Educativas</h1>
                     <p class="fs-4 fw-medium text-white-50" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Explora las diversas ofertas educativas que tiene Sena disponibles.</p>
-                    <a href="/offer/list" class="btn btn-success fw-bold px-4 py-2 mt-2" style="background-color: #39A900; border-color: #39A900;">Ver Ofertas</a>
+                    <a href="/offers" class="btn btn-success fw-bold px-4 py-2 mt-2" style="background-color: #39A900; border-color: #39A900;">Ver Ofertas</a>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
                 <div class="carousel-caption d-none d-md-block z-2 mt-4">
                     <h1 class="display-4 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Seguimiento de Programas</h1>
                     <p class="fs-4 fw-medium text-white-50" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Consulta los nuevos programas que se encuentran disponibles.</p>
-                    <a href="/program/list" class="btn btn-outline-light fw-bold px-4 py-2 mt-2">Descubre mas</a>
+                    <a href="/programs" class="btn btn-outline-light fw-bold px-4 py-2 mt-2">Descubre mas</a>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                 <div class="carousel-caption d-none d-md-block z-2 mt-4">
                     <h1 class="display-4 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Seguimiento de Anuncios</h1>
                     <p class="fs-4 fw-medium text-white-50" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Consulta en tiempo anuncios sobre la institución.</p>
-                    <a href="/advertisement/list" class="btn btn-outline-light fw-bold px-4 py-2 mt-2">Saber más</a>
+                    <a href="/advertisements" class="btn btn-outline-light fw-bold px-4 py-2 mt-2">Saber más</a>
                 </div>
             </div>
 
@@ -114,24 +114,20 @@
                             <i class="bi bi-journal-plus me-1"></i> Oferta
                         </span>
                         <small class="text-muted">
-                            <i class="bi bi-calendar3 me-1"></i> {{ \Carbon\Carbon::parse($offer->registration_date)->format('d M Y') }}
+                            <i class="bi bi-calendar3 me-1"></i> {{ \Carbon\Carbon::parse($offer['registration_date'])->format('d M Y') }}
                         </small>
                     </div>
                     <div class="card-body px-4">
                         <h5 class="card-title fw-bold text-dark mb-2">
-                            {{ $offer->program->name ?? 'Programa no asignado' }}
+                            ID del programa: {{ $offer['program_id'] ?? 'Programa no asignado' }}
                         </h5>
                         <p class="card-text text-secondary small mb-3">
-                            Días de formación: <strong>{{ $offer->day }}</strong><br>
-                            Cupos disponibles: <strong>{{ $offer->capacity }}</strong>
+                            Días de formación: <strong>{{ $offer['day'] }}</strong><br>
+                            Cupos disponibles: <strong>{{ $offer['capacity'] }}</strong>
                         </p>
-                        <ul class="list-unstyled small text-muted mb-0">
-                            <li class="mb-1"><i class="bi bi-clock me-2 text-success"></i> Duración: {{ $offer->program->duration ?? 'N/A' }}</li>
-                            <li><i class="bi bi-laptop me-2 text-success"></i> Modalidad: {{ $offer->program->modality ?? 'N/A' }}</li>
-                        </ul>
                     </div>
                     <div class="card-footer bg-light border-0 px-4 py-3 text-end">
-                        <a href="{{ route('offer.show', $offer->id) }}" class="btn btn-sm text-white fw-bold px-3 rounded-3" style="background-color: #39A900;">
+                        <a href="{{ route('offers.show', $offer['id']) }}" class="btn btn-sm text-white fw-bold px-3 rounded-3" style="background-color: #39A900;">
                             Ver detalles <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -149,20 +145,20 @@
                         <span class="badge bg-primary-subtle text-primary border border-primary fw-bold px-3 py-2 rounded-pill">
                             <i class="bi bi-award me-1"></i> Programa
                         </span>
-                        <span class="badge bg-light text-dark border small">{{ $program->type }}</span>
+                        <span class="badge bg-light text-dark border small">{{ $program['type'] }}</span>
                     </div>
                     <div class="card-body px-4">
-                        <h5 class="card-title fw-bold text-dark mb-2">{{ $program->name }}</h5>
+                        <h5 class="card-title fw-bold text-dark mb-2">{{ $program['name'] }}</h5>
                         <p class="card-text text-secondary small mb-3">
-                            {{ Str::limit($program->description, 100) }}
+                            {{ Str::limit($program['description'], 100) }}
                         </p>
                         <ul class="list-unstyled small text-muted mb-0">
-                            <li class="mb-1"><i class="bi bi-clock me-2 text-primary"></i> {{ $program->duration }}</li>
-                            <li><i class="bi bi-geo-alt me-2 text-primary"></i> Modalidad: {{ $program->modality }}</li>
+                            <li class="mb-1"><i class="bi bi-clock me-2 text-primary"></i> {{ $program['duration'] }}</li>
+                            <li><i class="bi bi-geo-alt me-2 text-primary"></i> Modalidad: {{ $program['modality'] }}</li>
                         </ul>
                     </div>
                     <div class="card-footer bg-light border-0 px-4 py-3 text-end">
-                        <a href="{{ route('program.show', $program->id) }}" class="btn btn-sm btn-outline-primary fw-bold px-3 rounded-3">
+                        <a href="{{ route('programs.show', $program['id']) }}" class="btn btn-sm btn-outline-primary fw-bold px-3 rounded-3">
                             Ver programa <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -173,7 +169,7 @@
             @endforelse
 
             <!-- SECCIÓN 3: ANUNCIOS -->
-            @forelse($advertisements as $ad)
+            @forelse($advertisements as $advertisement)
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 border-1 border-secondary shadow-lg rounded-4 overflow-hidden card-hover">
                     <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
@@ -181,21 +177,21 @@
                             <i class="bi bi-megaphone-fill me-1"></i> Anuncio
                         </span>
                         <small class="text-muted">
-                            <i class="bi bi-calendar3 me-1"></i> {{ \Carbon\Carbon::parse($ad->publish_date)->format('d M Y') }}
+                            <i class="bi bi-calendar3 me-1"></i> {{ \Carbon\Carbon::parse($advertisement['publish_date'])->format('d M Y') }}
                         </small>
                     </div>
                     <div class="card-body px-4">
-                        <h5 class="card-title fw-bold text-dark mb-2">{{ $ad->title }}</h5>
+                        <h5 class="card-title fw-bold text-dark mb-2">{{ $advertisement['title'] }}</h5>
                         <p class="card-text text-secondary small mb-3">
-                            {{ $ad->summary }}
+                            {{ $advertisement['summary'] }}
                         </p>
                         <ul class="list-unstyled small text-muted mb-0">
-                            <li class="mb-1"><i class="bi bi-person me-2 text-info"></i> Autor: {{ $ad->author }}</li>
-                            <li><i class="bi bi-building me-2 text-info"></i> Centro: {{ $ad->trainingcenter->name ?? 'General' }}</li>
+                            <li class="mb-1"><i class="bi bi-person me-2 text-info"></i> Autor: {{ $advertisement['author'] }}</li>
+                            <li><i class="bi bi-building me-2 text-info"></i> ID del Centro: {{ $advertisement['training_center_id'] }} </li>
                         </ul>
                     </div>
                     <div class="card-footer bg-light border-0 px-4 py-3 text-end">
-                        <a href="{{ route('advertisement.show', $ad->id) }}" class="btn btn-sm btn-outline-dark fw-bold px-3 rounded-3">
+                        <a href="{{ route('advertisements.show', $advertisement['id']) }}" class="btn btn-sm btn-outline-dark fw-bold px-3 rounded-3">
                             Leer más <i class="bi bi-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -210,71 +206,56 @@
     </div>
 </div>
 
-<div id="homeGuestContent" class="my-4">
-    <div class="card border border-dark shadow-sm rounded-4 p-4 bg-light">
-        <div class="d-flex align-items-center justify-content-between">
-            <div>
-                <h5 class="fw-bold mb-1 text-dark">¿Eres Administrador o Instructor?</h5>
-                <p class="mb-0 text-muted">Inicia sesión para gestionar las listas de aprendices y fichas de formación.</p>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mt-4">
+    <h2 class="fw-bold text-dark mb-0">Acceso directo</h2>
+</div>
+
+<div class="row g-3 text-center mt-4">
+    <div class="col-6 col-md-4 col-lg-2">
+        <a href="{{ route('apprentices.index') }}" class="text-decoration-none">
+            <div class="p-3 bg-white rounded-4 shadow-lg border border-success h-100 d-flex flex-column align-items-center justify-content-center">
+                <i class="bi bi-people text-success fs-2 mb-2"></i>
+                <span class="fw-bold text-dark small">Aprendices</span>
             </div>
-            <a href="{{ route('login') }}" class="btn text-white fw-bold px-4 py-2 rounded-3" style="background-color: #39A900;">
-                <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+        <a href="{{ route('courses.index') }}" class="text-decoration-none">
+            <div class="p-3 bg-white rounded-4 shadow-lg border border-primary h-100 d-flex flex-column align-items-center justify-content-center">
+                <i class="bi bi-journal-bookmark text-primary fs-2 mb-2"></i>
+                <span class="fw-bold text-dark small">Cursos</span>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+        <a href="{{ route('teachers.index') }}" class="text-decoration-none">
+            <div class="p-3 bg-white rounded-4 shadow-lg border border-warning h-100 d-flex flex-column align-items-center justify-content-center">
+                <i class="bi bi-person-badge text-warning fs-2 mb-2"></i>
+                <span class="fw-bold text-dark small">Instructores</span>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+        <a href="{{ route('about') }}" class="text-decoration-none">
+            <div class="p-3 bg-white rounded-4 shadow-lg border border-info h-100 d-flex flex-column align-items-center justify-content-center">
+                <i class="bi bi-building text-info fs-2 mb-2"></i>
+                <span class="fw-bold text-dark small">Nosotros</span>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-4">
+        <div class="p-3 bg-white rounded-4 shadow-lg border border-dark h-100 d-flex align-items-center justify-content-between px-4">
+            <div class="text-start">
+                <h6 class="fw-bold text-dark mb-0">¿Necesitas ayuda?</h6>
+                <small class="text-muted">Consulta la Misión SENA</small>
+            </div>
+            <a href="{{ route('about') }}" class="btn btn-sm btn-outline-success fw-bold rounded-3">
+                Saber más
             </a>
         </div>
     </div>
 </div>
 
-<div id="homeAdminContent" class="d-none my-4">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mt-4">
-        <h2 class="fw-bold text-dark mb-0">Acceso directo</h2>
-    </div>
-
-    <div class="row g-3 text-center mt-4">
-        <div class="col-6 col-md-4 col-lg-2">
-            <a href="{{ route('apprentice.index') }}" class="text-decoration-none">
-                <div class="p-3 bg-white rounded-4 shadow-lg border border-success h-100 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-people text-success fs-2 mb-2"></i>
-                    <span class="fw-bold text-dark small">Aprendices</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-            <a href="{{ route('course.index') }}" class="text-decoration-none">
-                <div class="p-3 bg-white rounded-4 shadow-lg border border-primary h-100 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-journal-bookmark text-primary fs-2 mb-2"></i>
-                    <span class="fw-bold text-dark small">Cursos</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-            <a href="{{ route('teacher.index') }}" class="text-decoration-none">
-                <div class="p-3 bg-white rounded-4 shadow-lg border border-warning h-100 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-person-badge text-warning fs-2 mb-2"></i>
-                    <span class="fw-bold text-dark small">Instructores</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-            <a href="{{ route('about') }}" class="text-decoration-none">
-                <div class="p-3 bg-white rounded-4 shadow-lg border border-info h-100 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-building text-info fs-2 mb-2"></i>
-                    <span class="fw-bold text-dark small">Nosotros</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-6 col-md-4 col-lg-4">
-            <div class="p-3 bg-white rounded-4 shadow-lg border border-dark h-100 d-flex align-items-center justify-content-between px-4">
-                <div class="text-start">
-                    <h6 class="fw-bold text-dark mb-0">¿Necesitas ayuda?</h6>
-                    <small class="text-muted">Consulta la Misión SENA</small>
-                </div>
-                <a href="{{ route('about') }}" class="btn btn-sm btn-outline-success fw-bold rounded-3">
-                    Saber más
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 
 <!-- BOTÓN FLOTANTE VOLVER ARRIBA -->
@@ -314,30 +295,6 @@
             top: 0,
             behavior: 'smooth'
         });
-    }
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        checkHomeAuth();
-    });
-
-    function checkHomeAuth() {
-        const userSession = localStorage.getItem('user_session');
-        const adminContent = document.getElementById('homeAdminContent');
-        const guestContent = document.getElementById('homeGuestContent');
-
-        if (userSession) {
-            // Muestra el contenido exclusivo para admins
-            if (adminContent) adminContent.classList.remove('d-none');
-            // Oculta la invitación a iniciar sesión
-            if (guestContent) guestContent.classList.add('d-none');
-        } else {
-            // Oculta el contenido exclusivo
-            if (adminContent) adminContent.classList.add('d-none');
-            // Muestra la invitación a iniciar sesión
-            if (guestContent) guestContent.classList.remove('d-none');
-        }
     }
 </script>
 

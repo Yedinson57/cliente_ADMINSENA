@@ -43,7 +43,7 @@
                                 </td>
                                 <td>
                                     <span class="badge bg-light text-dark border px-3 py-2 rounded">
-                                        Ficha: {{ $apprentice['course_id'] ?? 'No asignada' }}
+                                        Curso: {{ $apprentice['course_id'] ?? 'No asignada' }}
                                     </span>
                                 </td>
                                 <td>

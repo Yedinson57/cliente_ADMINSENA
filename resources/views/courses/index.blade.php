@@ -25,7 +25,7 @@
                                 <th class="ps-4 py-3">ID</th>
                                 <th class="py-3">Número Curso</th>
                                 <th class="py-3">Día / Fecha</th>
-                                <th class="py-3">Centro Formación</th>
+                                <th class="py-3">Centro</th>
                                 <th class="py-3">Ficha</th>
                                 <th class="py-3">Ambiente</th>
                                 <th class="py-3" style="width: 15%">Imagen Representativa</th>
@@ -41,18 +41,18 @@
                                 <td class="text-secondary small">{{ $course['day'] }}</td>
                                 <td>
                                     <span class="badge bg-success-subtle text-success border px-2 py-1 rounded">
-                                        {{ $course['training_center_id'] }}
+                                        ID: {{ $course['training_center_id'] }}
                                     </span>
                                 </td>
                                 <td>
                                     <span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded">
-                                        {{ $course['cohort_id']  }}
+                                        ID: {{ $course['cohort_id']  }}
                                     </span>
                                 </td>
 
                                 <td>
                                     <span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded">
-                                        {{ $course['environment_id']  }}
+                                        ID: {{ $course['environment_id']  }}
                                     </span>
                                 </td>
 

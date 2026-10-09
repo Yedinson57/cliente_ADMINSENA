@@ -31,4 +31,47 @@ class TeacherController extends Controller
 
         return view('teachers.show', compact('teachers'));
     }
+
+    public function create()
+    {
+        $url = env('URL_SERVER_API');
+        $areas = Http::get($url .'/areas')->json();
+        $trainingcenters = Http::get($url .'/trainingcenters')->json();
+
+        return view('teachers.create',compact('areas','trainingcenters'));
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/teachers', $request->all());
+
+        return redirect()->route('teachers.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $areas = Http::get($url .'/areas')->json();
+        $trainingcenters = Http::get($url .'/trainingcenters')->json();
+        $teacher = $this->fetchDataFromApi($url . '/teachers/' . $id);
+        return view('teachers.edit', compact('teacher','areas','trainingcenters'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/teachers/' . $id, $request->all());
+
+        return redirect()->route('teachers.index');
+    }
+
+    public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/teachers/' . $id);
+        return redirect()->route('teachers.index');
+    }
 }

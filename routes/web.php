@@ -13,6 +13,8 @@ use App\Http\Controllers\CohortController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\AdvertisementController;
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +25,10 @@ use App\Http\Controllers\AdvertisementController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/about', function () { return view('about'); })->name('about');
 
 Route::get('areas', [AreaController::class, 'index'])->name('areas.index');
 Route::get('area/create',[AreaController::class,'create'])->name('areas.create');
