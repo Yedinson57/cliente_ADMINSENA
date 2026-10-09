@@ -14,7 +14,7 @@ class AreaController extends Controller
         return $response->json();
     }
 
-    public function index()   
+    public function index()
     {
 
         $url = env('URL_SERVER_API');
@@ -30,5 +30,42 @@ class AreaController extends Controller
         $areas = $this->fetchDataFromApi($url . '/areas/' . $id);
 
         return view('areas.show', compact('areas'));
+    }
+
+    public function create()
+    {
+        return view('areas.create');
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/areas', $request->all());
+
+        return redirect()->route('areas.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $area = $this->fetchDataFromApi($url . '/areas/' . $id);
+        return view('areas.edit', compact('area'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/areas/' . $id, $request->all());
+
+        return redirect()->route('areas.index');
+    }
+
+    public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/areas/' . $id);
+        return redirect()->route('areas.index');
     }
 }
