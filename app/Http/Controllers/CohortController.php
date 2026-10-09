@@ -32,4 +32,45 @@ class CohortController extends Controller
 
         return view('cohorts.show', compact('cohorts'));
     }
+
+    public function create()
+    {
+        $url = env('URL_SERVER_API');
+        $offers = Http::get($url .'/offers')->json();
+
+        return view('cohorts.create',compact('offers'));
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/cohorts', $request->all());
+
+        return redirect()->route('cohorts.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $offers = Http::get($url .'/offers')->json();
+        $cohort = $this->fetchDataFromApi($url . '/cohorts/' . $id);
+        return view('cohorts.edit', compact('cohort','offers'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/cohorts/' . $id, $request->all());
+
+        return redirect()->route('cohorts.index');
+    }
+
+    public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/cohorts/' . $id);
+        return redirect()->route('cohorts.index');
+    }
 }

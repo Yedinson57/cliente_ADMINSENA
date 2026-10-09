@@ -31,4 +31,45 @@ class AdvertisementController extends Controller
 
         return view('advertisements.show', compact('advertisements'));
     }
+
+    public function create()
+    {
+        $url = env('URL_SERVER_API');
+        $trainingcenters = Http::get($url .'/trainingcenters')->json();
+
+        return view('advertisements.create',compact('trainingcenters'));
+    }
+
+    public function store(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/advertisements', $request->all());
+
+        return redirect()->route('advertisements.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $trainingcenters = Http::get($url .'/trainingcenters')->json();
+        $advertisement = $this->fetchDataFromApi($url . '/advertisements/' . $id);
+        return view('advertisements.edit', compact('advertisement','trainingcenters'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/advertisements/' . $id, $request->all());
+
+        return redirect()->route('advertisements.index');
+    }
+
+    public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/advertisements/' . $id);
+        return redirect()->route('advertisements.index');
+    }
 }

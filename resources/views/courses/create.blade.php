@@ -1,0 +1,110 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="py-5 rounded-4" style="background-color: #f4f6f9;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    
+                    <div class="card-header text-white text-center py-4" style="background-color: #39A900; border-bottom: none;">
+                        <h4 class="mb-0 fw-bold">Registrar Nuevo Curso</h4>
+                        <p class="mb-0 mt-1 small opacity-75">Asigne el número de ficha, fecha y locación</p>
+                    </div>
+                    
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            
+                            <div class="form-floating mb-4">
+                                <input type="number" 
+                                    class="form-control" 
+                                    id="course_number" 
+                                    name="course_number" 
+                                    placeholder="Número de curso" 
+                                    required>
+                                <label for="course_number" class="text-secondary">Número de curso</label>
+                            </div>
+                            
+                            <div class="form-floating mb-4">
+                                <input type="text" 
+                                    class="form-control" 
+                                    id="day" 
+                                    name="day" 
+                                    placeholder="Dias en los que se da el curso" 
+                                    required>
+                                <label for="day" class="text-secondary">Horario</label>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <select name="training_center_id" id="training_center_id" class="form-select" required>
+                                    <option value="" selected disabled>Seleccione una opción...</option>
+                                    @foreach ($trainingcenters as $training)
+                                        <option value="{{ $training['id'] }}">{{ $training['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="training_center_id" class="text-secondary">Centro de Formación</label>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <select name="cohort_id" id="cohort_id" class="form-select" required>
+                                    <option value="" selected disabled>Seleccione una opción...</option>
+                                    @foreach ($cohorts as $cohort)
+                                        <option value="{{ $cohort['id'] }}">{{ $cohort['code'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="cohort_id" class="text-secondary">Ficha Asociada</label>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <select name="environment_id" id="course_environment_id" class="form-select" required>
+                                    <option value="" selected disabled>Seleccione una opción...</option>
+                                    @foreach ($environments as $environment)
+                                        <option value="{{ $environment['id'] }}">{{ $environment['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="course_environment_id" class="text-secondary">Ambiente Asociado</label>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="urlFoto" class="form-label fw-bold text-secondary mb-1">Fotografía del Curso</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-secondary border-end-0 rounded-start-3">
+                                        <i class="bi bi-image"></i>
+                                    </span>
+                                    <input type="file"
+                                        name="urlFoto"
+                                        id="urlFoto"
+                                        class="form-control border-start-0 rounded-end-3 focus-ring @error('urlFoto') is-invalid @enderror"
+                                        accept="image/*">
+                                    @error('urlFoto')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="text-muted small mt-1 ps-1">
+                                    Formatos permitidos: JPG, PNG, WEBP.
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-5">
+                                <a href="/" class="btn btn-outline-secondary px-4 py-2 fw-medium rounded-3">
+                                    Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-dark px-5 py-2 fw-bold rounded-3">
+                                    Guardar Curso
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <a href="{{ route('courses.index') }}" class="btn text-white fw-bold px-4 py-2 shadow-sm d-inline-flex align-items-center gap-2" style="background-color: #39A900;">
+                        Revisar Registros
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
