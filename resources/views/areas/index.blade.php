@@ -34,46 +34,7 @@
                             <tr>
                                 <td class="ps-4 fw-bold text-secondary">#{{ $area['id'] }}</td>
                                 <td class="fw-medium text-dark">{{ $area['name'] }}</td>
-                                {{-- Columna de Imagen con Disparador de Modal --}}
-                                <td>
-                                    @if($area['urlFoto'])
-                                    <a href="#modalFoto{{ $area['id'] }}" data-bs-toggle="modal" class="d-inline-block text-decoration-none" title="Clic para ampliar">
-                                        <img src="{{ asset('storage/images/' . $area['urlFoto']) }}"
-                                            alt="Imagen de {{ $area['name'] }}"
-                                            width="80"
-                                            height="80"
-                                            class="shadow-sm border"
-                                            style="object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.2s;"
-                                            onmouseover="this.style.transform='scale(1.05)'"
-                                            onmouseout="this.style.transform='scale(1)'">
-                                    </a>
-
-                                    {{-- Modal para visualizar la imagen ampliada --}}
-                                    <div class="modal fade" id="modalFoto{{ $area['id'] }}" tabindex="-1" aria-labelledby="modalFotoLabel{{ $area['id'] }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
-                                                <div class="modal-header text-white" style="background-color: #39A900;">
-                                                    <h5 class="modal-title fw-bold" id="modalFotoLabel{{ $area['id'] }}">
-                                                        <i class="bi bi-image me-2"></i>{{ $area['name'] }}
-                                                    </h5>
-                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body text-center p-4 bg-light">
-                                                    <img src="{{ asset('storage/images/' . $area['urlFoto']) }}"
-                                                        alt="Imagen de {{ $area['name'] }}"
-                                                        class="img-fluid rounded-3 shadow-sm"
-                                                        style="max-height: 70vh; object-fit: contain;">
-                                                </div>
-                                                <div class="modal-footer bg-white border-top-0 d-flex justify-content-between">
-                                                    <span class="text-muted small">Código ID: #{{ $area['id'] }}</span>
-                                                    <button type="button" class="btn btn-secondary px-4 rounded-3" data-bs-dismiss="modal">Cerrar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @else
-                                    <span class="badge bg-light text-secondary border py-2 px-3 rounded-3">Sin foto</span>
-                                    @endif
+                                <td><img src="{{ $area['imagen_url'] }}" alt="{{ $area['name'] }}" width="100">
                                 </td>
 
                                 <td class="text-center">
