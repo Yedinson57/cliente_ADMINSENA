@@ -41,6 +41,7 @@ class TrainingCenterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
             'imagen' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
@@ -51,7 +52,7 @@ class TrainingCenterController extends Controller
         $file = $request->file('imagen');
 
         $response = Http::attach('imagen',file_get_contents($file->getRealPath()),$file->getClientOriginalName())
-        ->post(env('URL_SERVER_API') . '/trainingcenters',['name' => $request->name,]);
+        ->post(env('URL_SERVER_API') . '/trainingcenters',['name' => $request->name, 'location' => $request->location]);
 
         return redirect()->route('trainingcenters.index');
     }
